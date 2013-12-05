@@ -1,0 +1,15 @@
+<div class="center hero-unit">
+  <h1>UConn Buy or Sell</h1>
+
+  <h2>
+    Wanna Buy or Sell UConn tickets, you came to the right place
+  </h2>
+  <% if signed_in? %>
+
+<% else %>
+  <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+</div>
+
+
+
+<% end %>

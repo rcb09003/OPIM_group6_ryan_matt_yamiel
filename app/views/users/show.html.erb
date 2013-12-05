@@ -1,0 +1,66 @@
+<% provide(:title, @user.name) %>
+
+<div class="row">
+  <aside class="span4" style="margin:5px;">
+    <section>
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+
+  </aside>
+
+
+  
+    
+      <% if @soldtickets.any? %>
+        <div class="span8" style="width:100%;">
+          <h3>Completed Auctions (<%= @soldtickets.count %>)</h3>
+            <%= render @soldtickets %>
+
+          <%= will_paginate @soldtickets %>
+        <% end %>
+      </div>
+  
+  <br><br>
+
+    <% if @boughttickets.any? %>
+        <div class="span8" style="width:100%;">
+          <h3>Won Auctions (<%= @boughttickets.count %>)</h3>
+           <div style="background-color:orange;"> <%= render @boughttickets %></div>
+
+          <%= will_paginate @boughttickets %>
+        <% end %>
+      </div>
+  
+  <br><br>
+  
+
+  <div class="span8" style="width:100%;">
+    
+      <% if @validtickets.any? %>
+        <h3>Current Auctions (<%= @validtickets.count %>)</h3>
+        <div class="tickets">
+          <%= render @validtickets %>
+        </div>
+
+        <%= will_paginate @validtickets %>
+      <% end %>
+      
+  </div>
+      <br>
+
+   <div class="span8" style="width:100%; margin 0 auto;">
+      <% if @unsoldtickets.any? %>
+        <h3>Unsold Auctions (<%= @unsoldtickets.count %>)</h3>
+        <div class="tickets">
+          <%= render @unsoldtickets %>
+        </div>
+
+        <%= will_paginate @unsoldtickets %>
+      <% end %> 
+    </div>
+  
+
+  </div>

@@ -1,0 +1,64 @@
+<div class="col" style="border:2px solid; background-color:lightgrey; padding:5px; margin:4px;">
+
+  <span ><b style="font-size:16px; text-align:center;"><%= ticket.title %></b></span>
+  <br>
+  <%= ticket.quantity %>
+  <%= ticket.admission_type %> <%= ticket.event_type %>
+  <% if (ticket.quantity > 1) %>
+ 	Tickets
+  <% else %>
+  Ticket
+  <% end %>
+
+  <br>
+
+  <%= ticket.location %> 
+  <br>
+  <%= ticket.event_time.strftime('%a %B %e, %Y at %I:%M %p') %>
+  <br>
+
+  <div style="font-size:11px;">
+  Posted By: <%= link_to ticket.user.name, ticket.user %>
+  <span class="timestamp">
+  <%= time_ago_in_words(ticket.created_at) %> ago.
+  </span>
+  </div>
+
+  <% if ((ticket.buy_price != 0.00) && (ticket.bid_user == 0)) %>
+
+  <b>Buy It Now:</b> <%= "$"+number_with_precision(ticket.buy_price, precision: 2)
+   %>
+
+
+  <br>
+
+  <% end %>
+
+  <% if (ticket.starting_bid != 0.00) %>
+  	<% if (ticket.bid_user == 0) %>
+  		<b>Starting Bid:</b> <%= "$"+number_with_precision(ticket.starting_bid, precision: 2) %>
+  	<% else %>
+  		<b>Winning Bid:</b> <%= "$"+number_with_precision(ticket.starting_bid, precision: 2) %>
+  		<br>
+  		<b>Winning Bidder:</b> <%= link_to ticket_bidder(ticket.bid_user).name, ticket_bidder(ticket.bid_user) %>
+  	<% end %>
+  
+  <br>
+
+  <% end %>
+
+   Auction ended
+  <span class="timestamp">
+  <%= time_ago_in_words(ticket.bid_end) %> ago
+  </span>
+  <br>
+
+  <% if current_user?(ticket.user) %>
+    <%= link_to "Remove From Profile", ticket, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: ticket.title %>
+  <% else %>
+
+  <% end %>
+
+</div> 

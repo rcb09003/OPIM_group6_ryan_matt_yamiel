@@ -1,0 +1,11 @@
+<% provide(:title, @product.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <p>
+        <%= @product.name %>,  
+        <%= number_to_currency(@product.price) %>
+      </p>
+    </section>
+  </aside>
+</div>

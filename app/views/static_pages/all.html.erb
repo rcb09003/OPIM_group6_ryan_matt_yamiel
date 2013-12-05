@@ -1,0 +1,43 @@
+ <% provide(:title, 'All Tickets') %>
+
+ <div class="grid" style="width:100%; ">
+ 	
+ 	<%= render "static_pages/ticketsort.html.erb" %>
+ 	
+	<div style="width:80%; margin-left:25%;">
+ 	<%= form_tag "all", :method => 'get' do %>
+ 			<div style="width:60%; display:inline; float:left;">
+ 			<%= text_field_tag :search, params[:search] %>
+ 			</div>
+ 			<%= hidden_field_tag :searching, true %>
+ 			<div style="display:inline; float:left;">
+ 			<%= submit_tag "Search", :name => nil %>
+ 			</div>
+ 	<% end %>
+</div>
+
+<br>
+<br>
+ 	<center style=""><h3>All Tickets</h3></center>
+
+	<% if signed_in? %>
+
+	<% if @ticket.any? %>
+    
+      	<div class ="main" style="float:left;">
+    
+        	<%= render @ticket %>
+    
+      	</div>
+    
+      	<%= will_paginate @ticket %>
+    
+    <% end %>	
+
+    <% else %>
+
+    Please Sign In
+
+    <% end %>
+
+</div>

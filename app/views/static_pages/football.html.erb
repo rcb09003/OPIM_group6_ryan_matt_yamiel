@@ -1,0 +1,28 @@
+ <% provide(:title, 'Football Tickets') %>
+
+ <div class="grid" style="width:100%; ">
+ 	
+ 	<%= render "static_pages/ticketsortfootball.html.erb" %>
+ 	
+ 	<center><h3>Football Tickets</h3></center>
+	
+      <% if signed_in? %>
+	<% if @ticket.any? %>
+    
+      	<div class ="main" style="float:left;">
+    
+        	<%= render @ticket %>
+    
+      	</div>
+    
+      	<%= will_paginate @ticket %>
+    
+    <% end %>	
+
+     <% else %>
+
+    Please Sign In
+
+    <% end %>
+
+</div>

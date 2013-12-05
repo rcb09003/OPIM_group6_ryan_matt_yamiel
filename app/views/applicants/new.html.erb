@@ -1,0 +1,113 @@
+<% provide(:title, 'Job Application') %>
+<h1>Apply for Job</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@applicant) do |f| %>
+      
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name %>
+
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %>
+
+      <%= f.label :street %>
+      <%= f.text_field :street %>
+
+      <%= f.label :city %>
+      <%= f.text_field :city %>
+
+      <%= f.label :state %>
+      <%= f.select :state, [["AL", 'alabama'],
+                            ["AK", 'alaska'],
+                            ["AZ", 'arizona'],
+                            ["AR", 'arkansas'],
+                            ["CA", 'california'],
+                            ["CO", 'colorado'],
+                            ["CT", 'connecticut'],
+                            ["DE", 'delaware'],
+                            ["FL", 'florida'],
+                            ["GA", 'georgia'],
+                            ["HI", 'hawaii'],
+                            ["ID", 'idaho'],
+                            ["IL", 'illinois'],
+                            ["IN", 'indiana'],
+                            ["IA", 'iowa'],
+                            ["KS", 'kansas'],
+                            ["KY", 'kentucky'],
+                            ["LA", 'louisiana'],
+                            ["ME", 'maine'],
+                            ["MD", 'maryland'],
+                            ["MA", 'massachusetts'],
+                            ["MI", 'michigan'],
+                            ["MN", 'minnesota'],
+                            ["MS", 'mississippi'],
+                            ["MO", 'missouri'],
+                            ["MT", 'montana'],
+                            ["NE", 'nebraska'],
+                            ["NV", 'nevada'],
+                            ["NH", 'new hampshire'],
+                            ["NJ", 'new jersey'],
+                            ["NM", 'new mexico'],
+                            ["NY", 'new york'],
+                            ["NC", 'north carolina'],
+                            ["ND", 'north dakota'],
+                            ["OH", 'ohio'],
+                            ["OK", 'oklahoma'],
+                            ["OR", 'oregon'],
+                            ["PA", 'pennsylvania'],
+                            ["RI", 'rhode island'],
+                            ["SC", 'south carolina'],
+                            ["SD", 'south dakota'],
+                            ["TN", 'tennessee'],
+                            ["TX", 'texas'],
+                            ["UT", 'utah'],
+                            ["VT", 'vermont'],
+                            ["VA", 'virginia'],
+                            ["WA", 'washington'],
+                            ["WV", 'west virginia'],
+                            ["WI", 'wisconsin'],
+                            ["WY", 'wyoming']] %>
+
+      <%= f.label :zip %>
+      <%= f.text_field :zip %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.label :phone, "Phone Number  [Format: 555-656-2235]" %>
+      <%= f.text_field :phone %>
+
+      <%= f.label :position, "Position Sought" %>
+      <%= f.text_field :position %>
+
+      <%= f.label "Are you currently employed?" %>
+      <table cellpadding='10'>
+        <tr>
+          <td>
+            <%= f.label "Yes" %>
+          </td>
+          <td><%= f.radio_button :employed, "Yes" %></td>
+          <td>
+            <%= f.label "No" %>
+          </td>
+          <td><%= f.radio_button :employed, "No" %></td>
+        </tr>
+      </table>
+
+      <%= f.label :salary, "Desired Salary" %>
+      <%= f.text_field :salary %>
+
+      <%= f.label :start_date, "Available Start Date" %>
+      <%= f.text_field :start_date %>
+
+      <%= f.label :education, "List the name, location, year completed, and major area of study for any secondary schools or forms of higher education received" %>
+      <%= f.text_area :education %>
+
+      <%= f.label :skills, "Please list your special skills or other items that may be useful for this position" %>
+      <%= f.text_area :skills %>
+
+      <%= f.submit "Apply", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

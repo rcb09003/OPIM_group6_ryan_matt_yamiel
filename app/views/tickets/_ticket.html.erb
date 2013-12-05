@@ -1,0 +1,121 @@
+
+
+
+<% if (ticket.bid_end < Time.now) %>
+
+	<% if (ticket.bid_user == 0) %>
+		<%= render "tickets/unsold_ticket.html.erb", :ticket => ticket %>
+	<% else %>
+		<%= render "tickets/sold_ticket.html.erb", :ticket => ticket %>
+	<% end %>
+
+<% else %>
+
+	<% if (ticket.event_type == "Basketball") %>
+
+		<div class="col" style="border:2px solid; background-color:orange; padding:5px; margin:4px;">
+
+	<% else %>
+
+		<div class="col" style="border:2px solid; background-color:lightblue; padding:5px; margin:4px;">
+	<% end %>
+
+
+
+  <span ><b style="font-size:16px; text-align:center;"><%= ticket.title %></b></span>
+  <br>
+  <%= ticket.quantity %>
+  <%= ticket.admission_type %> <%= ticket.event_type %>
+  <% if (ticket.quantity > 1) %>
+ 	Tickets
+  <% else %>
+  	Ticket
+  <% end %>
+
+  <br>
+
+  <%= ticket.location %> 
+  <br>
+  <%= ticket.event_time.strftime('%a %B %e, %Y at %I:%M %p') %>
+  <br>
+
+  <div style="font-size:11px;">
+  	Posted By: <%= link_to ticket.user.name, ticket.user %>
+  	<span class="timestamp">
+  		<%= time_ago_in_words(ticket.created_at) %> ago.
+  	</span>
+  </div>
+
+  <% if ((ticket.buy_price != 0.00) && (ticket.bid_user == 0)) %>
+
+  	<%= form_for(ticket) do |f| %>
+   
+  		<div style="width:100%;">
+  			<div style="width:60%; float:left; font-size:16px; margin-right:0px; margin-top:5px;">
+  				<b>Buy It Now:</b> <%= "$"+number_with_precision(ticket.buy_price, precision: 2)%>
+   			</div>
+  			<div style="width:30%; float:left; font-size:5px; margin-right:10px;">
+  				<%= f.hidden_field :buyme, value: true %>
+  				<%= f.hidden_field :new_bid, value: ticket.buy_price %>
+  			</div>
+  			<div style="width:30%; float:left; margin-top:2px;">
+  				<%= f.submit "Buy Now", class: "btn btn-small" %>
+  			</div>
+  		</div>
+ 
+  	<% end %>
+	<br>
+
+  <% end %>
+
+  <% if (ticket.starting_bid != 0.00) %>
+  	
+  	<% if (ticket.bid_user == 0) %>
+  		<b>Starting Bid:</b> <%= "$"+number_with_precision(ticket.starting_bid, precision: 2) %>
+  	
+  	<% else %>
+  		<b>Current Bid:</b> <%= "$"+number_with_precision(ticket.starting_bid, precision: 2) %>
+  		<br>
+  		<b>Bidder:</b> <%= link_to ticket_bidder(ticket.bid_user).name, ticket_bidder(ticket.bid_user) %>
+  	
+  	<% end %>
+  		
+  	<% if (!current_user?(ticket.user)) %>
+
+  		<%= form_for(ticket) do |f| %>
+   
+  		<div style="width:100%;">
+  			<b style="width:18%; float:left; font-size:16px; margin-right:0px; margin-top:5px;"> Bid: $</b>
+  			<div style="width:30%; float:left; font-size:5px; margin-right:10px;">
+				<%= f.text_field :new_bid, value: number_with_precision(0.00, precision: 2) %>
+  			</div>
+  			<div style="width:30%; float:left; margin-top:2px;">
+  				<%= f.submit "Place Bid", class: "btn btn-small" %>
+  			</div>
+  		</div>
+ 
+  		<% end %>
+  	<% end %>
+  
+  	<br>
+
+  <% end %>
+
+  Auction ending in
+  <span class="timestamp">
+  	<%= time_ago_in_words(ticket.bid_end) %>
+  </span>
+  <br>
+
+  <% if current_user?(ticket.user) %>
+    <%= link_to "delete", ticket, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: ticket.title %>
+  <% else %>
+
+  <% end %>
+
+
+<% end %>
+
+</div> 

@@ -1,0 +1,82 @@
+<h1>Post New Ticket</h1>
+
+<%= form_for(@ticket) do |f| %>
+
+  <div class="span6 offset3">
+    <div id="ticket_form">
+
+      <div id="inner">
+        <label style="width:30px;">Title:</label>
+          <inputbx>
+            <%= f.text_field :title %>
+	        </inputbx>
+      </div>
+
+      <div id="inner" style"display:inline;float:left; font-size:12px;">
+
+        <label style="width:30px;">Sport:</label>
+        <inputbx style="width:30px; display:inline;">
+          <%= f.select :event_type, [['Basketball','Basketball'],['Football','Football']] %>
+	      </inputbx>
+
+        <label style="width:60px;">Admission:</label>
+        <inputbx style="width:35px; display:inline;">
+          <%= f.select :admission_type, [['Student','Student'],['General','General']] %>
+      	</inputbx>
+
+        <label style="width:50px;">Quantity:</label>
+        <inputbx style="width:40px;">
+        <%= f.number_field :quantity %>
+        </inputbx>
+
+
+      </div>
+
+      <div id="inner">
+        <label style="width:65px;">Event:</label>
+        <inputbx id="date-select">
+          <%= f.datetime_select :event_time, :order => [:month, :day, :year]  %>
+        </inputbx>
+      </div>
+
+      <div id="location">
+        <label>Location:</label>
+        <inputbx>
+        	<%= f.text_field :location %>
+        </inputbx>
+       </div>
+
+       
+
+      <div id="inner">
+        <label style="width:90px;">Starting Bid: $</label>
+        <inputbx>
+          <%= f.text_field :starting_bid, value: number_with_precision(0.00, precision: 2) %>
+        </inputbx>
+      </div>
+
+      <div id="inner">
+        <label style="width:85px;">Buy it now: $</label>
+        <inputbx>
+          <%= f.text_field :buy_price, value: number_with_precision(0.00, precision: 2) %>
+        </inputbx>
+      </div>
+
+      
+      
+      <div id="inner">
+        <label style="width:65px;">End Date:</label>
+        <inputbx id="date-select">
+          <%= f.datetime_select :bid_end, :order => [:month, :day, :year]  %>
+        </inputbx>
+      </div>
+    
+    </div>
+
+<%= f.text_area :comments, placeholder: "Add Comments Here" %>
+  
+  <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+<% end %>
+  </div>
+
+ 
